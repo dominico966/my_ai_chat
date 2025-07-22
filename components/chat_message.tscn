@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf2c55jmme22f"]
+
+[ext_resource type="Script" uid="uid://bgug8yy0upb4m" path="res://components/chat_message.gd" id="1_j21d3"]
+[ext_resource type="Texture2D" uid="uid://dmnaxntb23xh0" path="res://images/user_icon.png" id="1_wq60c"]
+
+[node name="chat_message" type="MarginContainer"]
+offset_right = 186.0
+offset_bottom = 40.0
+script = ExtResource("1_j21d3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LeftSpacer" type="PanelContainer" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="AIIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Some Text For Sampling"
+
+[node name="UserIcon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("1_wq60c")
+expand_mode = 2
+
+[node name="RightSpacer" type="PanelContainer" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2

@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqled0bof6ytc"]
+
+[ext_resource type="Script" uid="uid://bf3teakc76g8m" path="res://chat_core_control.gd" id="1_oomig"]
+[ext_resource type="Texture2D" uid="uid://cy16xratabgrm" path="res://images/background.jpg" id="2_wfhfy"]
+
+[node name="ChatCoreControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oomig")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+position = Vector2(-892, 681)
+scale = Vector2(1.15037, 1.15037)
+texture = ExtResource("2_wfhfy")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConversationPanel" type="PanelContainer" parent="Panel/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VSplitContainer/ConversationPanel"]
+layout_mode = 2
+
+[node name="ChatLogContainer" type="VBoxContainer" parent="Panel/VSplitContainer/ConversationPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VSplitContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="UserInputTextEdit" type="TextEdit" parent="Panel/VSplitContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "대화를 입력하세요!
+"
+wrap_mode = 1
+
+[node name="Button" type="Button" parent="Panel/VSplitContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Send
+"
+
+[connection signal="pressed" from="Panel/VSplitContainer/PanelContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
