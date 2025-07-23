@@ -27,7 +27,7 @@ func _on_button_pressed() -> void:
 	print_debug(user_input.text)
 	var message = chat_message_scene.instantiate()
 	chatlog_container.add_child(message)
-	message.set_text(ChatMessage.TYPE.User, user_input.text)
+	message.set_text(user_input.text)
 	user_input.text = ""
 	
 	# 한 프레임 기다렸다가 스크롤 내려야 layout이 반영됨

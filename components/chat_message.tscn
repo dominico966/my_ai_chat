@@ -1,39 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf2c55jmme22f"]
+[gd_scene load_steps=4 format=3 uid="uid://bf2c55jmme22f"]
 
 [ext_resource type="Script" uid="uid://bgug8yy0upb4m" path="res://components/chat_message.gd" id="1_j21d3"]
 [ext_resource type="Texture2D" uid="uid://dmnaxntb23xh0" path="res://images/user_icon.png" id="1_wq60c"]
+[ext_resource type="Theme" uid="uid://vonyu55lie37" path="res://app_theme.tres" id="2_rcdwj"]
 
 [node name="chat_message" type="MarginContainer"]
 offset_right = 186.0
 offset_bottom = 40.0
 script = ExtResource("1_j21d3")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 2
-color = Color(0, 0, 1, 1)
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="LeftSpacer" type="PanelContainer" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 3.0
 
 [node name="AIIcon" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="LabelContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
-text = "Some Text For Sampling"
+theme = ExtResource("2_rcdwj")
+theme_type_variation = &"RoundedPanel"
 
-[node name="UserIcon" type="TextureRect" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/LabelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/LabelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+autowrap_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_rcdwj")
+theme_type_variation = &"TransparentPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="UserIcon" type="TextureRect" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture = ExtResource("1_wq60c")
-expand_mode = 2
+expand_mode = 4
+stretch_mode = 5
 
 [node name="RightSpacer" type="PanelContainer" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 5.0

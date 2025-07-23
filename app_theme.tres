@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://vonyu55lie37"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oomxk"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.909638, 0.940269, 0.999999, 0.762)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oomxk"]
+
+[resource]
+RoundedPanel/base_type = &"PanelContainer"
+RoundedPanel/styles/panel = SubResource("StyleBoxFlat_oomxk")
+TransparentPanel/base_type = &"PanelContainer"
+TransparentPanel/styles/panel = SubResource("StyleBoxEmpty_oomxk")
