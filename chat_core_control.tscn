@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqled0bof6ytc"]
+[gd_scene load_steps=4 format=3 uid="uid://bqled0bof6ytc"]
 
 [ext_resource type="Script" uid="uid://bf3teakc76g8m" path="res://chat_core_control.gd" id="1_oomig"]
 [ext_resource type="Texture2D" uid="uid://cy16xratabgrm" path="res://images/background.jpg" id="2_wfhfy"]
+[ext_resource type="Theme" uid="uid://vonyu55lie37" path="res://app_theme.tres" id="3_wfhfy"]
 
-[node name="ChatCoreControl" type="Control"]
+[node name="ChatCoreControl" type="Control" node_paths=PackedStringArray("openai_endpoint", "openai_token", "user_input", "chatlog_container", "send_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +12,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oomig")
+openai_endpoint = NodePath("Panel/VBoxContainer/MarginContainer/GridContainer/openai_endpoint")
+openai_token = NodePath("Panel/VBoxContainer/MarginContainer/GridContainer/openai_token")
+user_input = NodePath("Panel/VBoxContainer/VSplitContainer/PanelContainer/HBoxContainer/UserInputTextEdit")
+chatlog_container = NodePath("Panel/VBoxContainer/VSplitContainer/ConversationPanel/ScrollContainer/ChatLogContainer")
+send_button = NodePath("Panel/VBoxContainer/VSplitContainer/PanelContainer/HBoxContainer/Button")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.407843)
@@ -31,47 +37,79 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VSplitContainer" type="VSplitContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_wfhfy")
 
-[node name="ConversationPanel" type="PanelContainer" parent="Panel/VSplitContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "OpenAI Chat Endpoint :"
+
+[node name="openai_endpoint" type="LineEdit" parent="Panel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "http://localhost:8000/v1/chat/completions"
+placeholder_text = "http://localhost:8000/v1/chat/completions"
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "OpenAI Token :"
+
+[node name="openai_token" type="LineEdit" parent="Panel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Token"
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConversationPanel" type="PanelContainer" parent="Panel/VBoxContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 8.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VSplitContainer/ConversationPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/VSplitContainer/ConversationPanel"]
 layout_mode = 2
 
-[node name="ChatLogContainer" type="VBoxContainer" parent="Panel/VSplitContainer/ConversationPanel/ScrollContainer"]
+[node name="ChatLogContainer" type="VBoxContainer" parent="Panel/VBoxContainer/VSplitContainer/ConversationPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/VSplitContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/VBoxContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VSplitContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/VSplitContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="UserInputTextEdit" type="TextEdit" parent="Panel/VSplitContainer/PanelContainer/HBoxContainer"]
+[node name="UserInputTextEdit" type="TextEdit" parent="Panel/VBoxContainer/VSplitContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "대화를 입력하세요!
 "
 wrap_mode = 1
 
-[node name="Button" type="Button" parent="Panel/VSplitContainer/PanelContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="Panel/VBoxContainer/VSplitContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Send
 "
 
-[node name="Popup" type="Popup" parent="."]
-visible = true
-
-[connection signal="pressed" from="Panel/VSplitContainer/PanelContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/VSplitContainer/PanelContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]

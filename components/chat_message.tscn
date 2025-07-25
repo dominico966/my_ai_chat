@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmnaxntb23xh0" path="res://images/user_icon.png" id="1_wq60c"]
 [ext_resource type="Theme" uid="uid://vonyu55lie37" path="res://app_theme.tres" id="2_rcdwj"]
 
-[node name="chat_message" type="MarginContainer"]
+[node name="ChatMessage" type="MarginContainer"]
 offset_right = 186.0
 offset_bottom = 40.0
 script = ExtResource("1_j21d3")
